@@ -96,12 +96,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             emailjs.send('service_ewu7lqk', 'template_iua9nh3', templateParams)
                 .then(() => {
-                    showNotification('Message sent successfully!');
+                    alert('Message sent successfully!');
                     contactForm.reset();
                 })
                 .catch((error) => {
                     console.error('EmailJS error:', error);
-                    showNotification('Failed to send message. Please try again.');
+                    alert('Failed to send message. Please try again.');
                 })
                 .finally(() => {
                     btn.textContent = originalText;
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(formData),
         });
 
-        showNotification('Message sent!');
+        alert('Message sent!');
     }
 
 });
