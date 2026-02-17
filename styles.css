@@ -92,21 +92,6 @@ body {
     width: 100%;
 }
 
-/* .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-} */
-
-/* .hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary-color);
-    margin: 5px 0;
-    transition: 0.3s;
-    border-radius: 2px;
-} */
-
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -369,13 +354,13 @@ body {
     height: 400px;
 }
 
-/* .profile-image {
-    width: 300px;
-    height: 400px;
-    margin: 10px;
-    border-width: 2.0rem;
-    border-radius: 20px;
-} */
+.profile-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 2.0rem;
+}
 
 .gradient-box {
     position: absolute;
@@ -385,6 +370,8 @@ body {
     border-radius: 50px;
     box-shadow: 0 50px 60px rgba(99, 102, 241, 0.2);
     animation: float 3s ease-in-out infinite;
+
+
 }
 
 /* Skills Section */

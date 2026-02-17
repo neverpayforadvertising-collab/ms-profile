@@ -12,13 +12,14 @@ export default async function handler(req, res) {
     try {
         await resend.emails.send({
             from: 'Portfolio <onboarding@resend.dev>',
-            to: 'yourgmail@gmail.com',
+            to: 'neverpayforadvertising@gmail.com',
             subject: `New message from ${name}`,
             html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong><br/>${message}</p>
-    `,
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Subject:</strong> ${subject}</p>
+                <p><strong>Message:</strong><br/>${message}</p>
+                `,
         });
 
         res.status(200).json({ success: true });
