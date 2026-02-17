@@ -92,20 +92,20 @@ body {
     width: 100%;
 }
 
-.hamburger {
+/* .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
-}
+} */
 
-.hamburger span {
+/* .hamburger span {
     width: 25px;
     height: 3px;
     background-color: var(--primary-color);
     margin: 5px 0;
     transition: 0.3s;
     border-radius: 2px;
-}
+} */
 
 /* Hero Section */
 .hero {
@@ -712,8 +712,9 @@ body {
 }
 
 .back-home {
-    margin-top: 1vh;
+    margin-top: 0.5vh;
     text-align: center;
+    text-decoration: none;;
 }
 
 /* Footer */
@@ -865,9 +866,9 @@ body {
             display: none;
         }
 
-        .hamburger {
+        /* .hamburger {
             display: flex;
-        }
+        } */
 
         .hero-text h1 {
             font-size: 2rem;
