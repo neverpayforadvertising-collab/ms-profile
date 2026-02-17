@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = {
             name: e.target.name.value,
             email: e.target.email.value,
+            subject: e.target.subject.value,
             message: e.target.message.value,
         };
 
