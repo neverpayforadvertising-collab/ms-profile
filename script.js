@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: document.getElementById('message').value
             };
 
-            emailjs.send('service_xheu1zk', 'template_iua9nh3', templateParams)
+            emailjs.send('service_ewu7lqk', 'template_iua9nh3', templateParams)
                 .then(() => {
                     alert('Message sent successfully!');
                     contactForm.reset();
@@ -108,6 +108,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     btn.disabled = false;
                 });
         });
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        const formData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            message: e.target.message.value,
+        };
+
+        await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        alert('Message sent!');
     }
 
 });

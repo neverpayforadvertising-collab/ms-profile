@@ -369,6 +369,14 @@ body {
     height: 400px;
 }
 
+/* .profile-image {
+    width: 300px;
+    height: 400px;
+    margin: 10px;
+    border-width: 2.0rem;
+    border-radius: 20px;
+} */
+
 .gradient-box {
     position: absolute;
     width: 20%;
@@ -714,7 +722,8 @@ body {
 .back-home {
     margin-top: 0.5vh;
     text-align: center;
-    text-decoration: none;;
+    text-decoration: none;
+    ;
 }
 
 /* Footer */
