@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const btn = contactForm.querySelector('button[type="submit"]');
@@ -87,47 +87,53 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.textContent = "Sending...";
             btn.disabled = true;
 
-            const templateParams = {
+            const formData = {
                 name: document.getElementById('name').value,
-                // email: document.getElementById('email').value,
                 subject: document.getElementById('subject').value,
                 message: document.getElementById('message').value
             };
 
-            emailjs.send('service_ewu7lqk', 'template_iua9nh3', templateParams)
-                .then(() => {
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (res.ok) {
                     alert('Message sent successfully!');
                     contactForm.reset();
-                })
-                .catch((error) => {
-                    console.error('EmailJS error:', error);
-                    alert('Failed to send message. Please try again.');
-                })
-                .finally(() => {
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                });
+                } else {
+                    alert('Failed to send message.');
+                }
+            } catch (err) {
+                alert('Error sending message.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
         });
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
 
-        const formData = {
-            name: e.target.name.value,
-            subject: e.target.subject.value,
-            message: e.target.message.value,
-        };
+    // async function handleSubmit(e) {
+    //     e.preventDefault();
 
-        await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
+    //     const formData = {
+    //         name: e.target.name.value,
+    //         subject: e.target.subject.value,
+    //         message: e.target.message.value,
+    //     };
 
-        alert('Message sent!');
-    }
+    //     await fetch('/api/contact', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(formData),
+    //     });
+
+    //     alert('Message sent!');
+    // }
 
 });

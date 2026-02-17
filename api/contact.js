@@ -12,17 +12,18 @@ export default async function handler(req, res) {
     try {
         await resend.emails.send({
             from: 'Portfolio <onboarding@resend.dev>',
-            to: 'CONTACT_EMAIL',
+            to: process.env.CONTACT_EMAIL, 
             subject: `New message from ${name}`,
             html: `
                 <p><strong>From:</strong> ${name}</p>
                 <p><strong>Subject:</strong> ${subject}</p>
                 <p><strong>Message:</strong><br/>${message}</p>
-                `,
+            `,
         });
 
         res.status(200).json({ success: true });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Email failed to send' });
     }
 }
