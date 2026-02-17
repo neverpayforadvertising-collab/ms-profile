@@ -16,7 +16,6 @@ export default async function handler(req, res) {
             subject: `New message from ${name}`,
             html: `
                 <p><strong>From:</strong> ${name}</p>
-                <p><strong>To:</strong> ${process.env.CONTACT_EMAIL}</p>
                 <p><strong>Subject:</strong> ${subject}</p>
                 <p><strong>Message:</strong><br/>${message}</p>
             `,

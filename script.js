@@ -1,41 +1,121 @@
+// Wait until DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    const contactForm = document.getElementById('contactForm');
 
-    if (!contactForm) return;
+    // =========================
+    // Mobile menu toggle
+    // =========================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
 
-    contactForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
 
-        const btn = contactForm.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.textContent = "Sending...";
-        btn.disabled = true;
+    // =========================
+    // Smooth scrolling for nav links
+    // =========================
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
 
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
-            message: document.getElementById('message').value
-        };
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(targetId);
 
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
 
-            if (res.ok) {
-                alert('Message sent successfully!');
-                contactForm.reset();
-            } else {
-                alert('Failed to send message.');
+                // Close mobile menu after click
+                if (navMenu) {
+                    navMenu.classList.remove('active');
+                }
             }
-        } catch (err) {
-            alert('Error sending message.');
-        } finally {
-            btn.textContent = originalText;
-            btn.disabled = false;
+        });
+    });
+
+    // =========================
+    // Scroll effects
+    // =========================
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('section');
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (window.pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        // Highlight active nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+
+        // Navbar shadow on scroll
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
         }
     });
+
+    // =========================
+    // Contact form submission
+    // =========================
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = "Sending...";
+            btn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('name').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (res.ok) {
+                    alert('Message sent successfully!');
+                    contactForm.reset();
+                } else {
+                    alert('Failed to send message.');
+                }
+            } catch (error) {
+                console.error('Contact error:', error);
+                alert('Error sending message.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+    }
+
 });
