@@ -13,6 +13,7 @@
     --light-bg: #f1f5f9;
     --overall-bg: linear-gradient(225deg, #ff4dff 0.000%, #e18ff4 25.000%, #b9d1e7 50.000%, #91ffdb 75.000%, #6affcd 100.000%);
     --sub-bg: linear-gradient(135deg, #dbc6ef 0.000%, #dec6f4 20.000%, #f4cae5 40.000%, #ffd2c7 60.000%, #f7dda9 80.000%, #e1ed99 100.000%);
+    --content-bg: linear-gradient(135deg, #f4ccee 0.000%, #fad0da 20.000%, #f8dacd 40.000%, #eee6c7 60.000%, #ddf1c9 80.000%, #c7f9d1 100.000%);
     --text-heading: #4b50b8;
     --text-light: #3e2a51;
     --white: #ffffff;
@@ -329,7 +330,7 @@ body {
 .stat {
     text-align: center;
     padding: 1.5rem;
-    background: white;
+    background: var(--content-bg);
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
@@ -344,9 +345,14 @@ body {
 }
 
 .stat p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin: 0;
+    align-items: center;
+    color: var(--primary-color);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .image-wrapper {
@@ -356,8 +362,8 @@ body {
 
 .profile-image {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 32%;
+    left: 40%;
     transform: translate(-50%, -55%);
     padding-bottom: 1.5rem;
 }
@@ -551,7 +557,7 @@ body {
 .project-content {
     padding: 1.0rem;
     text-align: center;
-    background: linear-gradient(135deg, #f4ccee 0.000%, #fad0da 20.000%, #f8dacd 40.000%, #eee6c7 60.000%, #ddf1c9 80.000%, #c7f9d1 100.000%);
+    background: var(--content-bg);
 }
 
 .project-content h3 {
@@ -744,7 +750,7 @@ body {
 
 @keyframes slideInLeft {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: translateX(-50px);
     }
 
@@ -756,7 +762,7 @@ body {
 
 @keyframes slideInRight {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: translateX(50px);
     }
 
@@ -785,7 +791,7 @@ body {
     }
 
     100% {
-        opacity: 0;
+        opacity: 1;
         transform: translateY(10px);
     }
 }
@@ -797,7 +803,7 @@ body {
     }
 
     100% {
-        opacity: 0;
+        opacity: 1;
         transform: rotate(-45deg) translate(8px, 8px);
     }
 }
